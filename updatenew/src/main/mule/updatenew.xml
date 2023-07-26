@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<file:config name="File_Config" doc:name="File Config" doc:id="0123fe8b-d4f1-4641-aa41-dc98b64a115b" />
+	<file:config name="File_Config1" doc:name="File Config" doc:id="203d4e62-66c4-4b19-97d6-c63dff8305e1" />
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="461f66fe-c9b2-47e0-8ba4-12976e8604e7" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<file:config name="File_Config2" doc:name="File Config" doc:id="7c8047ec-c0d9-4873-901f-391128b7f76b" />
+	<file:config name="File_Config3" doc:name="File Config" doc:id="6565b315-0ca2-4aa1-8ddb-f7f80f425e7d" />
+	<file:config name="File_Config4" doc:name="File Config" doc:id="bccbe20f-324f-4e84-a020-4962757b158f" />
+	<file:config name="File_Config5" doc:name="File Config" doc:id="83cd0b66-3376-46a3-a323-808d31108bc1" />
+	<file:config name="File_Config6" doc:name="File Config" doc:id="74162359-6804-4eec-a5cb-ba3427fadb3c" />
+	<file:config name="File_Config7" doc:name="File Config" doc:id="10edfe09-0b94-4015-8c21-edfa1e249c21" />
+	<file:config name="File_Config8" doc:name="File Config" doc:id="2d17c57b-e2b6-4d83-bc6f-f9285afcab01" />
+	<file:config name="File_Config9" doc:name="File Config" doc:id="c24563c3-b9b7-4775-993f-3d9a6b2a8a5b" />
+	<flow name="updatenewFlow" doc:id="31db1dca-0fb9-4bb8-8f9d-86535ad11c55" >
+		<http:listener doc:name="Listener" doc:id="b56d6dce-99ef-4b90-a550-4e236e26ad77" config-ref="HTTP_Listener_config" path="/flow"/>
+		<file:read doc:name="Read" doc:id="017be077-2dec-4a27-8f33-8483f09f051f" config-ref="File_Config2" path="C:\Users\eswar\Downloads\tk\New Text Document.txt"/>
+		<file:move doc:name="Move" doc:id="55614458-a936-4714-b2f6-85a59572dcf8" config-ref="File_Config3" sourcePath="C:\Users\eswar\Downloads\sk" targetPath="C:\Users\eswar\Downloads\tk"/>
+		<file:write doc:name="Write" doc:id="39dd0d9f-c52a-441c-9e8e-fe377979f94f" config-ref="File_Config4" path="C:\Users\eswar\Downloads\tk\New Text Document.txt"/>
+		<file:rename doc:name="Rename" doc:id="6b0cd918-a82c-4b36-8a60-8b1a9812c989" config-ref="File_Config5" path="C:\Users\eswar\Downloads\tk\sk" to="C:\Users\eswar\Downloads\tk"/>
+		<file:list doc:name="List" doc:id="79e5055c-0fc2-4c87-8362-88ae3ec7d3d8" config-ref="File_Config6" directoryPath="C:\Users\eswar\Downloads\tk"/>
+		<file:delete doc:name="Delete" doc:id="facf5db4-8f91-45f9-a2c6-1817b9e67451" config-ref="File_Config7" path="C:\Users\eswar\Downloads\tk\sk"/>
+		<file:create-directory doc:name="Create directory" doc:id="31f3b13c-94d5-4b36-b6ed-5a5ebc64ce7e" config-ref="File_Config8" directoryPath="C:\Users\eswar\Downloads\pan front"/>
+		<file:copy doc:name="Copy" doc:id="8b1a1982-186b-4610-84ae-7129d62a70cb" config-ref="File_Config9" sourcePath="C:\Users\eswar\Downloads\pan front\WhatsApp_files" targetPath="C:\Users\eswar\Downloads\tk"/>
+	</flow>
+</mule>
