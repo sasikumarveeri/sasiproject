@@ -20,6 +20,7 @@
 		</munit:execution>
 		<munit:validation >
 			<munit-tools:assert doc:name="Assert payload" doc:id="6b1ab80a-e632-4690-96d7-5d5b33e8fbdf" message="The payload does not match">
+			<munit-tools:assert doc:name="Assert payload" doc:id="6b1ab80a-e632-4690-96d7-5d5b33e8fbdf" message="The payload does not match">
 				<munit-tools:that ><![CDATA[#[%dw 2.0
 import publishconsumeapiFlowtest::assert_expression_payload
 ---
