@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="publish-consume-api-suite.xml" />
+	<munit:test name="publish-consume-apiFlow-test" doc:id="858acdcb-90c2-4b40-b068-9a5af60141c3" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="a2e882fe-1624-41c3-b698-27cfffd2f3d8" >
+				<munit:payload value="#[readUrl('classpath://publishconsumeapiFlowtest\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://publishconsumeapiFlowtest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to publish-consume-apiFlow" doc:id="efb6f184-2a39-4411-a57c-f2097938f8a2" name="publish-consume-apiFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="6b1ab80a-e632-4690-96d7-5d5b33e8fbdf" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import publishconsumeapiFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

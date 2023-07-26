@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a8a83e0b-ecd1-4e55-8c05-4a0afa58d615" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<vm:config name="VM_Config" doc:name="VM Config" doc:id="9044e30b-a828-42ab-abd4-c4bb4645a524" >
+		<vm:queues >
+			<vm:queue queueName="mqs6" />
+		</vm:queues>
+	</vm:config>
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="15ab4e39-a66b-4779-82dc-6f999b9815e2" >
+		<http:listener-connection host="0.0.0.0" port="1122" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config2" doc:name="HTTP Listener config" doc:id="427259e2-570e-467a-b370-55c05bf8c9ee" >
+		<http:listener-connection host="0.0.0.0" port="1122" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config3" doc:name="HTTP Listener config" doc:id="8b1af5ce-3ac2-415c-b22b-6f62e43dd101" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config4" doc:name="HTTP Listener config" doc:id="a1f5e416-40c1-4ee2-9a8b-e47f4fd4456b" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="publish-consume-apiFlow" doc:id="53aebb77-d56f-4593-98cc-ae58737c9f07" >
+		<http:listener doc:name="Listener" doc:id="72e6450e-150f-43fc-a535-12dff33ad457" config-ref="HTTP_Listener_config1" path="mule"/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="1eb17336-dbfe-4211-8606-624491752a5f" />
+		<vm:publish queueName="mqs6" doc:id="cc9f630a-b038-4387-903f-e6d9f7f685aa" config-ref="VM_Config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="b928ad03-3a95-428f-9e0e-2b1dce26c4ea" message="come to the class"/>
+	</flow>
+</mule>
